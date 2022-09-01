@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --gap: 0.5em;
+    --index: calc(1vw + 1vh);
+    /* 1vw - один процент от резиновой ширины, 1vh - один процент от резиновой высоты - это настоящие значения = индекс, который учитывает высоту и ширину */
+    --dark-color: rgb(12, 12, 12);
+}
+
+body {
+    overflow: hidden;
+    /* Обязательный параметр, тк наш viewport ограничен (убираем полосы прокрутки) */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* СТИЛИЗАЦИЯ ЗАГОЛОВКА */
+
+.header {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    font-size: calc(var(--index) * 2.5);
+    /* Размер шрифта зависит от размера экрана, в котором он находится (адаптивность) */
+    font-weight: 200;
+    position: absolute;
+    text-align: center;
+}
+
+.header span {
+    font-size: calc(var(--index) * 0.7);
+    margin-top: 15px;
+    display: block;
+    /* Чтобы слово перенеслось на новую строку */
+}
+
+/* ОТОБРАЖЕНИЕ ЭЛЕМЕНТОВ */
+
+.gallery {
+    width: 30vw;
+    column-width: 2em;
+    gap: var(--gap);
+    transform: scale(9.5);
+}
+
+.gallery__item {
+    margin-bottom: var(--gap);
+    transition: 0.5s;
+}
+
+.gallery__item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 5px #50b3de;
+}
+
+.gallery__item img {
+    width: 100%;
+    display: block;
+}
+
+/* ПОЯВЛЕНИЕ И СКРЫТИЕ ЭЛЕМЕНТОВ ПОСЛЕ ЗАГРУЗКИ */
+
+.loaded .gallery {
+    opacity: 1;
+}
+
+.loaded .header span {
+    opacity: 0;
+}
+
+/* ОФОРМЛЕНИЕ ТЕМНОЙ ТЕМЫ */
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--dark-color);
+        color: #fff;
+    }
+
+    .gallery__item:hover {
+        box-shadow: 0 0 5px #edd03e;
+    }
+}
